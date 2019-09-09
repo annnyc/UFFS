@@ -1,0 +1,45 @@
+import java.util.Scanner;
+class conta {
+  int conta;
+  String nome;
+  float saldo;
+  float limite;
+  void saca(double valor){
+    this.saldo -= valor;
+  }
+
+  void deposita(double valor){
+    this.saldo += valor;
+  }
+            }
+
+
+
+class pr{
+  public static void main(String[] args){
+    Scanner entrada = new Scanner(System.in);
+    int opt = 0;
+
+    conta minhaconta = new conta();
+
+    System.out.print("digite o nome do dono:");
+    minhaconta.nome = entrada.nextLine();
+
+    System.out.print("digite o saldo inicial");
+    minha.conta.saldo = entrada.nextDouble();
+
+    System.out.println("\no dono da conta:"+minhaconta.nome);
+    System.out.printf("\no saldo da conta: %2f\n\n",minhaconta.saldo);
+
+    minhaconta.saca(500);
+    System.out.printf("o saldo da conta: %2f\n\n",minhaconta.saldo);
+
+    minhaconta.deposita(222);
+    System.out.printf("o saldo da conta: %2f\n\n",minhaconta.saldo);
+
+    minhaconta.saldo = 100;
+
+    System.out.print("saldo da conta:"+minhaconta.saldo);
+      }
+
+                                      }

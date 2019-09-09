@@ -1,0 +1,91 @@
+import java.util.Scanner;
+class conta {
+  int conta;
+  String nome;
+  double saldo;
+  float limite;
+  void saca(double valor){
+    this.saldo -= valor;
+  }
+
+  void deposita(double valor){
+    this.saldo += valor;
+  }
+            }
+
+
+
+class pr{
+  public static void main(String[] args){
+    Scanner entrada = new Scanner(System.in);
+    int opt = 0,o1=4;
+    float dp;
+    double sc,cont=1000.00;
+
+    conta minhaconta = new conta();
+
+
+
+    System.out.println("digite o nome do dono:");
+    minhaconta.nome = entrada.nextLine();
+    System.out.println("Informe o número da conta:");
+    minhaconta.conta = entrada.nextInt();
+
+    System.out.println("Bem-vind@, "+minhaconta.nome+"\nConta n°: "+minhaconta.conta+"\n");
+    System.out.println("----------------------Menu----------------------\n");
+    System.out.println("Digite o número que corresponde a opção desejada\n");
+    System.out.println("1. Consultar saldo");
+    System.out.println("2. Efetuar saque ");
+    System.out.println("3. Efetuar depósito");
+    System.out.println("4. Sair");
+    o1 = entrada.nextInt();
+
+
+    while(o1!=0){
+
+
+      if(o1==1){
+        minhaconta.saldo = cont;
+
+        System.out.print("saldo da conta:"+minhaconta.saldo);
+      }
+
+      if(o1==2){
+        System.out.println("Informe o valor que deseja sacar:");
+        sc = entrada.nextFloat();
+        minhaconta.saca(sc);
+        cont=cont-sc;
+        System.out.println("Novo saldo:"+cont+"\n");
+      }
+
+      if(o1==3){
+        System.out.println("x\n");
+      }
+      if(o1==4){
+        System.out.println("kkk\n");
+      }
+      else{
+        System.out.println("kkkkkkkkkkkkk\n");}
+        o1--;
+        break;
+    }
+
+
+
+
+    System.out.print("digite o saldo inicial");
+    minhaconta.saldo = entrada.nextFloat();
+
+    System.out.println("\no dono da conta:"+minhaconta.nome);
+    System.out.printf("\no saldo da conta: %2f\n\n",minhaconta.saldo);
+
+    minhaconta.saca(500);
+    System.out.printf("o saldo da conta: %2f\n\n",minhaconta.saldo);
+
+    // minhaconta.deposita(222);
+    // System.out.printf("o saldo da conta: %2f\n\n",minhaconta.saldo);
+
+
+      }
+
+                                      }
