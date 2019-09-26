@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+int multmatriz(int *tamanho,int *matriz);
+
+void printaMatriz(int *tamanho, int *matriz){
+  int i,j;
+  for(i=0;i<tamanho;i++){
+    for(j=0;j<tamanho;j++){
+      printf("Elemento:%d \t",matriz[i][j]);
+    }
+  }
+
+}
+
+
+int main(){
+  int x, i, j, vetor1[x][x];
+  printf("Tamanho:\n");
+  scanf("%d",&x);
+  for(i=0;i<x;i++){
+    for(j=0;j<x;j++){
+      printf("Elemento em [%d] [%d]: \n",i,j);
+      scanf("%d", &vetor1[i][j]);
+    }
+  }
+
+  printaMatriz(&x,&vetor1);
+
+return 0;
+}
+////////////////////////////////
+
+
+#include<stdio.h>
+int main(){
+  int *v[5],*n[5],*aux;
+  int y;
+  for(int i=0;i<5;i++){
+    printf("digite um numero:");
+    scanf("%p",&v[i]);
+  }
+  for(int i=0;i<5;i++){
+    y=i+1;
+    for( ;y<5;y++){
+      if(v[i]<v[y]){
+        aux=v[i];
+        v[i]=v[y];
+        v[y]=aux;
+      }
+    }
+    n[i]=v[i];
+  }
+  for(int i=0;i<5;i++){
+    printf("%d\n",*n[i]);
+  }
+
+
+}
