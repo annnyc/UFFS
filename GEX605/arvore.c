@@ -1,232 +1,203 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-typedef struct node {
-    int data;
-    struct node* left;
-    struct node* right;
-}tree_node;
+#define SIZE 10 // 10.000.000
 
+struct STree {
+  int value;
+  struct STree *left, *right;
+};
 
-int lookup(tree_node* node, int target) {
-  // 1. Caso base == empty tree
-  // nesse caso, o target não é encontrado e retorna falso
-  if (node == NULL) {
-    return 0;
-  }
-  else {
-    // 2. Caso encontrado retorna true
-    if (target == node->data) {
-      return 1;
-    }
-    else {
-      // 3. Caso contrário, verifica (recursivamente) a subárvore correta
-      if (target < node->data) {
-        return(lookup(node->left, target));
-      }
-      else {
-        return(lookup(node->right, target));
-      }
-    }
-  }
-}
+typedef struct STree TTree;
 
-tree_node *NewNode(int data) {
-  tree_node *node = (tree_node *)malloc(sizeof(tree_node));
-  node->data = data;
-  node->left = NULL;
-  node->right = NULL;
-  return node;
-}
-
-tree_node* insert(tree_node* node, int data) {
-	  // 1. Se a árvore estiver vazia, retorne um novo nó único
-  if (node == NULL) {
-    return NewNode(data);
-  }
-  else {
-    // 2. Caso contrário, recorra a árvore
-    if (data <= node->data) {
-      node->left = insert(node->left, data);
-    }
-    else {
-      node->right = insert(node->right, data);
-    }
-    return node;
-  }
-}
-
-int size(tree_node* node) {
-  if (node==NULL) {
-    return 0;
-  } else {
-    return size(node->left) + 1 + size(node->right);
-  }
-}
-
-int maxDepth(tree_node* node) {
-  if (node==NULL) {
-    return 0;
-  }
-  else {
-    // calcular a profundidade de cada subárvore
-    int lDepth = maxDepth(node->left);
-    int rDepth = maxDepth(node->right);
-    // usa a maiorz
-    if (lDepth > rDepth) {
-      return lDepth+1;
-    }
-    else {
-      return rDepth+1;
-    }
-  }
-}
-
-int minValue(tree_node* node) {
-  tree_node* current = node;
-  // loop para encontrar a folha mais a esquerda
-  while (current->left != NULL) {
-    current = current->left;
-  }
-  return current->data;
-}
-
-int maxValue(tree_node* node) {
-  tree_node* current = node;
-  // loop para encontrar a folha mais a esquerda
-  while (current->right != NULL) {
-    current = current->right;
-  }
-  return current->data;
-}
-
-void printTreeInOrder(tree_node* node) {
-  //implementar
-  // Dada uma árvore de pesquisa binária, imprima seus elementos
-  // de dados em ordem correta.
-
-  // 1. Caso base == empty tree
-  if (node == NULL){
-    return ;
-  }
-
-  // 2. imprime (recursivamente) o lado esquerdo
-  printTreeInOrder(node->left);
-
-  // 3. imprime o nodo atual
-  printf("%d ", node->data);
-
-  // 4. imprime (recursivamente) o lado direito
-  printTreeInOrder(node->right);
-}
-
-void printPostorder(tree_node* node) {
-  //implementar
-  // Dada uma árvore binária, imprima seus nós de acordo com o
-  // percurso de pós-ordem "de baixo para cima".
-
-  // 1. Caso base == empty tree
-  if (node == NULL)
-  {
-    return;
-  }
-
-  // 2. imprime (recursivamente) o lado esquerdo
-  printTreeInOrder(node->left);
-
-  // 3. imprime (recursivamente) o lado direito
-  printTreeInOrder(node->right);
-
-  // 4. imprime o nodo atual
-  printf("%d ", node->data);
-}
-
-void printPreorder(tree_node* node) {
-  //implementar
-  // Dada uma árvore binária, imprima seus nós de acordo com o
-  // percurso de pré-ordem "de cima para baixo ".
-
-  // 1. Caso base == empty tree
-  if (node == NULL)
-  {
-    return;
-  }
-
-  // 1. imprime o nodo atual
-  printf("%d ", node->data);
-
-  // 3. imprime (recursivamente) o lado esquerdo
-  printTreeInOrder(node->left);
-
-  // 4. imprime (recursivamente) o lado direito
-  printTreeInOrder(node->right);
-}
-
-int isBST(tree_node* node) {
-  if (node==NULL) {
-    return 1;
-  }
-  // falso se o min da esquerda é maior que o valor atual
-  if (node->left!=NULL && minValue(node->left) > node->data){
-    return 0;
-  }
-  // falso se o max da direita é menor ou igual que o valor atual
-  if (node->right!=NULL && maxValue(node->right) <= node->data){
-    return 0;
-  }
-  // false se os galhos abaixo (verificados recursivamente) não são uma BST
-  if (!isBST(node->left) || !isBST(node->right)){
-    return 0;
-  }
-  // se chegou até aqui, é uma BST
-  return 1;
-}
-
-int delete(tree_node *node, int value){
-  if(node==NULL){
-    printf("nao tem o que excluir\n");
-    return 0;
-  }else{
-    // delete(node->left);
-    // delete(node->right);
-    free(node);
-
-  }
-}
-
-
+// get free memory for storing the value and pointers
+// return the address of the spot
+TTree *getMem();
+// Insert following Binary Search Tree rules
+TTree *insertBST(TTree *, int );
+// Delete value from the Binary Search Tree (its properties must be kept)
+TTree *deleteBST(TTree *, int );
+// Search for a value in the tree from address pointed by r
+TTree *searchBST(TTree *, int );
+//  Impressões ordenada
+void PrintInOrder(TTree *);
+//
+void PrintPreOrder(TTree *);
+//
+void PrintPosOrder(TTree *);
+//
+// free up the allocated spaces
+void cleanTree(TTree *);
+//
+int treeHeight(TTree *);
+//
+int numberOfNodes(TTree *);
+//
+void printBFS(TTree *, int );
+//
+void BFS(TTree *);
+//
 int main()
 {
-	tree_node *root=NULL;
+    TTree *myTree=NULL, *root=NULL;
+    long int i;
+    int n,x,exc;
+    clock_t begin, end;
+    double time_spent;
+    srand(time(NULL));   // New seed for random numbers
+    printf("Inserindo %d números recursivamente...\n",SIZE);
+    begin=clock();
+    x=treeHeight(root);
+    for (i=1;i<=SIZE;i++)
+    {
 
-	root = insert(root, 5);
-	root = insert(root, 2);
-	root = insert(root, 3);
-  root = insert(root, 1);
-  root = insert(root, 4);
-  root = insert(root, 6);
+		n=rand()%10;
+    printf("%d ",n);
+		myTree=insertBST(root,n);
+		if (root==NULL) root=myTree;
+    }
+    end=clock();
+    time_spent=(double)(end-begin)/CLOCKS_PER_SEC;
+    printf("\nTempo (em s)%5.2f: \n",time_spent);
+    printf("\n# of nodes: %d\n",numberOfNodes(root));
+    printf("\nAltura (raiz): %d\n",x);
+    printf("\nAltura (1o. filho esq.): %d\n",treeHeight(root->left));
+    printf("\nAltura (1o. filho dir.): %d\n",treeHeight(root->right));
+    printf("\nAltura (1o. filho esq. do 1o. filho dir.): %d\n",treeHeight(root->right->left));
+    printf("\nAltura (1o. filho dir. do 1o. filho dir.): %d\n",treeHeight(root->right->right));
+    PrintInOrder(root);
+    printf("\Exclusão?");
 
-	printf("Lookup: %d\n", lookup(root, 8));
+    cleanTree(root);
+    BFS(root);
+    return 0;
+}
 
-  printf("Size: %d\n", size(root));
+TTree *getMem()
+{
+	TTree *new=(TTree *)malloc(sizeof(TTree));
+	if (new==NULL)
+	{
+		printf("FATAL ERROR! NO MEMORY AVAILABLE!\n");
+		return NULL;
+	}
+	new->right=NULL;
+	new->left=NULL;
+	return new;
+}
+// Insert following Binary Search Tree rules
+TTree *insertBST(TTree *r, int vl)
+{
+    if (r==NULL)
+    {
+		TTree *new=getMem();
+		new->value=vl;
+		return new;
+	}
+	if (vl>=r->value)
+	{
+    if (vl==r->value)
+    {
+      return r;
+    }
+		if (r->right==NULL)
+		{
+  		    TTree *new=getMem();
+		    new->value=vl;
+			r->right=new;
+			return new;
+		}
+		return insertBST(r->right,vl);
+	} else
+	{
+		if (r->left==NULL)
+		{
+  		    TTree *new=getMem();
+		    new->value=vl;
+			r->left=new;
+			return new;
+		}
+		return insertBST(r->left,vl);
+	}
+}
+// Search for a value in the tree from address pointed by r
+TTree *searchSBT(TTree *r, int vl)
+{
+	if (r==NULL) return NULL;
+	if (r->value==vl) return r;
+	if (vl>=r->value) return searchSBT(r->right,vl);
+	else              return searchSBT(r->left,vl);
+}
+//  Impressões ordenada
+void PrintInOrder(TTree *r)
+{
+	if (r==NULL) return;
+	PrintInOrder(r->left);
+	printf("%d ",r->value);
+	PrintInOrder(r->right);
+}
+//
+void PrintPreOrder(TTree *r)
+{
+	if (r==NULL) return;
+	printf("%d ",r->value);
+	PrintPreOrder(r->left);
+	PrintPreOrder(r->right);
+}
+//m do núcleo gravada)
 
-  printf("maxDepth: %d\n", maxDepth(root));
-
-  printf("minValue: %d\n", minValue(root));
-
-  printf("InOrdem\n");
-	printTreeInOrder(root);
-
-  printf("\nPosOrdem\n");
-	printPostorder(root);
-
-  printf("\nPreOrdem\n");
-	printPreorder(root);
-
-  printf("\nDelete\n");
-  delete(root);
-
-
-
-  return 0;
+void PrintPosOrder(TTree *r)
+{
+	if (r==NULL) return;
+	PrintPosOrder(r->left);
+	PrintPosOrder(r->right);
+	printf("%d ",r->value);
+}
+//
+// free up the allocated spaces
+void cleanTree(TTree *r)
+{
+	if (r==NULL) return;
+	cleanTree(r->left);
+	cleanTree(r->right);
+  free(r);
+}
+//
+int treeHeight(TTree *n)
+{
+  int l,r;
+  if (n==NULL) return 0;
+  l=treeHeight(n->left);
+  r=treeHeight(n->right);
+  if (l>r) return l+1;
+  else     return r+1;
+}
+//
+int numberOfNodes(TTree *n)
+{
+  if (n==NULL) return 0;
+  return numberOfNodes(n->left)+numberOfNodes(n->right)+1;
+}
+void printBFS(TTree *r, int i)
+{
+  if (r==NULL) return;
+  if (i==1)
+  {
+    printf(" %d ",r->value);
+  }
+  else
+  {
+    printBFS(r->left,i-1);
+    printBFS(r->right,i-1);
+  }
+}
+void BFS(TTree *r)
+{
+  int h=treeHeight(r),i;
+  for (i=1;i<=h;i++)
+  {
+    printBFS(r,i);
+    printf("\n");
+  }
 }
