@@ -1,3 +1,15 @@
+// Nome: Any Cruz S - 1721101005
+// 1) Utilizando o que foi feito até agora com as classes Conta e Programa, crie um
+// menu, utilizando a estrutura do..while com as seguintes opções:
+// 1. Consultar saldo
+// 2. Efetuar saque
+// 3. Efetuar depósito
+// 4. Sair
+//  Dentro de cada uma das opções, implemente a chamada do método respectivo.
+//  Saia da estrutura de repetição (do..while) quando o usuário digitar 4.
+//  Dica: Dentro dos métodos, você pode utilizar entrada e saída de dados
+
+
 import java.util.Scanner;
 class conta {
   int conta;
@@ -95,24 +107,5 @@ class pr{
         System.out.println("Opção inválida!\n");}
         break;
     } while(opt!=0);
-
-
-
-
-
-
-
-
-    // System.out.println("\no dono da conta:"+minhaconta.nome);
-    // System.out.printf("\no saldo da conta: %2f\n\n",minhaconta.saldo);
-    //
-    // minhaconta.saca(500);
-    // System.out.printf("o saldo da conta: %2f\n\n",minhaconta.saldo);
-
-    // minhaconta.deposita(222);
-    // System.out.printf("o saldo da conta: %2f\n\n",minhaconta.saldo);
-
-
       }
-
                                       }
