@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+// int bubblesort(){
+//
+// };
+
+// int selectionsort(int vetor[y], int y){
+//   int y,i,m,aux;
+//   for(i=0;i<=(y-2);i++){
+//     if(i==0){
+//       m = vetor[i];
+//       n = vetor[k];
+//     }
+//     if(vetor[i]>m){
+//       m = vetor[i];
+//     }else{
+//       if(vetor[i]<n){
+//         n = vetor[i];
+//
+//         aux = vetor[i];
+//         n = []
+//
+//       }
+//     }
+//   }
+// };
+
+// int insertingsort(){
+//
+// };
+
+
+
+
+void selectionsort (int vetor[], *int n) {
+    int i, j, m, t;
+    for (i = 0; i < n; i++) {
+        for (j = i, m = i; j < n; j++) {
+            if (vetor[j] < vetor[m]) {
+                m = j;
+            }
+        }
+        t = vetor[i];
+        vetor[i] = vetor[m];
+        vetor[m] = t;
+    }
+};
+
+int main(){
+  int vetor[10] = {85,12,23,17,45,11,13,47,1,50}, x = 10,i;
+  for(i=0;i<10;i++){
+    selectionsort(&vetor[10], &x);
+  }
+
+  for(i=0;i<10;i++){
+            printf("vetor em [%d]: %d\n", i, vetor[i]);
+  }
+
+};
