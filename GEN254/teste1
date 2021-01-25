@@ -1,0 +1,11 @@
+Teste 1: Contagem de arestas em grafo completo.
+
+Quantas arestas tem em um grafo completo de 10 vértices?
+
+Resposta: Tendo em mente que:O número de arestas em um grafo completo é n(n-1)/2.
+Então: 10*(10-1)/2 = 10*(9)/2 = 45.
+
+
+Quantas arestas tem em um grafo completo de n vértices?
+Resposta: Um grafo é dito ser completo quando há uma aresta entre cada par de seus vértices. Estes grafos são designados por Kn, onde n é a ordem do grafo. 
+Um grafo Kn possui o número máximo possível de arestas para um dados n. Ele é, também regular-(n-1) pois todos os seus vértices tem grau n-1
