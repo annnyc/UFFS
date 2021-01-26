@@ -1,0 +1,37 @@
+Prove que o algoritmo de Dijkstra calcula os caminhos mínimos.
+
+Tendo em vista o seguinte pseudo código:
+
+Dijkstra(G, s)
+    para todos u ∈ V \ {s}, d(u) = ∞
+    d(s) = 0
+    R = {}
+    enquanto R 6= V
+      escolha u /∈ R com o menor  d(u)
+      R = R ∪ {u}
+      para todos os vertices v adjacentes a u
+          se d(v) > d(u) + `(u, v)
+              d(v) = d(u) + `(u, v)
+
+Assumindo que d(v) seja o rotulo encontrado pelo algoritmo de Dijkstra e que  δ(v) seja o menor caminho em termos de distancia entre s até o v. O objetivo é provar que 
+d(v) =  δ(v) para todos os vertice v no fim do algoritmo, mostrando que o algoritmo computa as distancias corretamente, e ai entra a indução matemática com o seguinte lema:
+  Para cada X ∈ R, d(x) = δ(x).
+
+
+Assumindo que o caso base seja (|R| = 1): Desde que R apenas cresça para um lado, o unico momento que |R| = 1 é quando R = {s} e d(s) = 0 = δ(s), o que está certo.
+Hipótese de indução: U é o ultimo vertice adicionado a R. Assumindo que R0 = R∪ {u}. A hipótese de indução é para cada  x ∈ R0, d(x) = δ(x).
+
+Aplicando a hipótese de indução:  De acordo com a hipótes, para cada vértice de R0 que não é u, nós obtemos a distancia correta. Nós precisamos provar que d(u)= δ(u) para finalizar.
+Suponha que por uma contradição que o mais curto dos vertices de s para u seja Q e tenha tamanho '(Q) < d(u). Q começa em R0 e em algumas folhas da arvore R0 (para alcançar u que nao esta em R0).
+Assuma que xy seja a primeira borda para Q que saia de R0. 
+E depois assuma que Qx faça o caminho de s pra x, sendo o subcaminho de Q. Temos entao que:
+`(Qx) + `(xy) ≤ `(Q)
+Sabemos que d(x) é o tamanho do menor camino de s para x pela hipótese de indução, d(x) <='Qx, temos que:
+d(x) + `(xy) ≤ `(Qx)
+Desde que y é a adjacente a x, d(y) deve haver uma mudança no algoritmo então fica d(y) ≤ d(x) + `(xy).
+Por fim, desde que u foi escolhido pelo algoritmo, o u tem sido a menor distancia: u) ≤ d(y)
+Combinando as inequalidades ao contrario da ordem nos da a contraduçao que d(x) < d(x), não existe caminho mais curto que Q mas também existe o d(u) = δ(u).
+
+
+
+
