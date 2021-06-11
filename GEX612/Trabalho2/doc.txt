@@ -1,0 +1,18 @@
+000 linha 1
+001 linha 2
+010 linha 3
+011 linha 4
+100 linha 5
+101 linha 6
+110 linha 7
+111 linha 8
+
+deslocamento (pra qual celula vai)
+00 deslocamento 1
+01 deslocamento 2
+10 deslocamento 3
+11 deslocamento 4
+
+100.10.011 
+
+111.00.010
