@@ -16,7 +16,14 @@ void heap(int vetor[], int tamanho){
     leftChild = vetor[(2*root)+1];
     rightChild = vetor[(2*root)+2];
     
-    if(rightChild)
+    if(leftChild < tamanho){
+        int maiorValor = leftChild;
+    }
+
+    if(rightChild < tamanho){
+        
+    }
+    
 
 
 }
@@ -35,6 +42,8 @@ int main(){
     for(int i = 0; i < tamanhoVetor ; i++){
         vetor[i] = (rand() % 100);
     }
+    imprimeVetor(vetor, tamanhoVetor);
+    printf(" \n .");
 
     heap(vetor, tamanhoVetor);
     imprimeVetor(vetor, tamanhoVetor);
